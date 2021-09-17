@@ -5,7 +5,7 @@ const cx = 50;
 const cy = 50;
 let r = 50;
 
-export let hoursCoordinates: Array<{ top: string, left: string, val: string }> = [];
+export let hoursCoordinates: Array<{ top: string, left: string, val: number }> = [];
 let angle = Math.PI;
 for ( let hours = 0; hours < 24; hours++ ) {
     if (hours === 12) r -= 13;
@@ -15,7 +15,7 @@ for ( let hours = 0; hours < 24; hours++ ) {
     hoursCoordinates.push({
         top: `calc(${x}% - 12px)`,
         left: `calc(${y}% - 12px)`,
-        val: ('0' + hours.toString()).slice(-2),
+        val: +('0' + hours.toString()).slice(-2),
     });
 
     angle -= Math.PI / 6;

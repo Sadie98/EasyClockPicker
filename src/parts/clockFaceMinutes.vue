@@ -25,37 +25,35 @@
   </div>
 </template>
 
-<script>
-import {minutesCoordinates} from "@/constants/minutesCoordinates";
+<script lang="ts">
+import { minutesCoordinates } from "@/constants/minutesCoordinates";
+import { Vue, Component } from 'vue-property-decorator';
 
-export default {
-  name: "clockFaceMinutes",
-  data() {
-    return {
-      minutesCoordinates: minutesCoordinates,
-      activeMinute: 0,
-      selectedMinute: -1,
-    }
-  },
-  methods: {
-    minuteHovered(val) {
+@Component
+export default class clockFaceMinutes extends Vue {
+   private minutesCoordinates = minutesCoordinates;
+   private activeMinute = 0;
+   private selectedMinute = -1;
+
+    minuteHovered(val: number) {
       if (this.selectedMinute === -1){
         this.activeMinute = val;
         this.$emit('minuteHovered', val);
       }
-    },
-    minuteClicked(val){
+    }
+
+    minuteClicked(val: number){
       if (this.selectedMinute !== val){
         this.selectedMinute = val;
         this.$emit('minuteHovered', val);
       } else {
         this.selectedMinute = -1;
       }
-    },
-    isNeedToBeHovered(val){
+    }
+
+    isNeedToBeHovered(val: number){
       return (this.activeMinute === val && this.selectedMinute === -1) || (this.selectedMinute === val);
     }
-  }
 }
 </script>
 

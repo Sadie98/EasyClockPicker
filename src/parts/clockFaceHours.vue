@@ -12,16 +12,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { hoursCoordinates } from "@/constants/hoursCoordinates";
+import { Component, Vue } from 'vue-property-decorator';
 
-export default {
-  name: "clockFaceHours",
-  data() {
-    return {
-      hoursCoordinates: hoursCoordinates,
-    }
-  },
+@Component
+export default class clockFaceHours extends Vue {
+  private hoursCoordinates = hoursCoordinates;
 }
 </script>
 
