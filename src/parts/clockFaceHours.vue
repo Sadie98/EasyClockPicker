@@ -1,15 +1,11 @@
-<template>
-  <div class="iec-clock-hours" ref="hoursSquare">
-    <div
+<template lang="pug">
+  .iec-clock-hours(ref="hoursSquare")
+    .iec-clock-hour(
       v-for="hourCoordinates in hoursCoordinates"
-      class="iec-clock-hour"
       :style="{ top: hourCoordinates.top, left: hourCoordinates.left }"
       @click="$emit('selected', hourCoordinates.val )"
-    >
-      {{ hourCoordinates.val }}
-    </div>
-    <div class="iec-clock-hours_center"/>
-  </div>
+    ) {{ hourCoordinates.val }}
+    .iec-clock-hours_center
 </template>
 
 <script lang="ts">

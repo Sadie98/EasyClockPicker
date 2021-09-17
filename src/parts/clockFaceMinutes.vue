@@ -1,28 +1,19 @@
-<template>
-  <div class="iec-clock-minutes">
-    <div v-for="minuteCoordinates in minutesCoordinates">
-      <div
-          class="iec-clock-minute"
-          :class="{
-            'iec-clock-minute--tiny': minuteCoordinates.val % 5 !== 0,
-            hovered: isNeedToBeHovered(minuteCoordinates.val)
-          }"
-          :style="{ top: minuteCoordinates.top, left: minuteCoordinates.left }"
-          @click="minuteClicked(minuteCoordinates.val)"
-          @mouseenter="minuteHovered(minuteCoordinates.val)"
-      >
-        {{ minuteCoordinates.val % 5 === 0 ? minuteCoordinates.val : '' }}
-      </div>
-      <div
-          class="iec-clock-minutes_arrow"
-          :class="{hovered: isNeedToBeHovered(minuteCoordinates.val)}"
-          :style="{ transform: `rotate(${180 + minuteCoordinates.val * 6}deg)` }"
-          @mouseenter="minuteHovered( minuteCoordinates.val)"
-          @click="minuteClicked(minuteCoordinates.val)"
-      />
-    </div>
-    <div class="iec-clock-minutes_center"/>
-  </div>
+<template lang="pug">
+  .iec-clock-minutes
+    .iec-clock-minutes_numbers(v-for="minuteCoordinates in minutesCoordinates")
+      .iec-clock-minute(
+        :class="{'iec-clock-minute--tiny': minuteCoordinates.val % 5 !== 0, hovered: isNeedToBeHovered(minuteCoordinates.val)}"
+        :style="{ top: minuteCoordinates.top, left: minuteCoordinates.left }"
+        @click="minuteClicked(minuteCoordinates.val)"
+        @mouseenter="minuteHovered(minuteCoordinates.val)"
+      ) {{ minuteCoordinates.val % 5 === 0 ? minuteCoordinates.val : '' }}
+      .iec-clock-minutes_arrow(
+        :class="{hovered: isNeedToBeHovered(minuteCoordinates.val)}"
+        :style="{ transform: `rotate(${180 + minuteCoordinates.val * 6}deg)` }"
+        @mouseenter="minuteHovered( minuteCoordinates.val)"
+        @click="minuteClicked(minuteCoordinates.val)"
+      )
+    .iec-clock-minutes_center
 </template>
 
 <script lang="ts">

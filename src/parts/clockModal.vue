@@ -1,20 +1,15 @@
-<template>
-  <div class="iec-clock-modal" v-if="isShown">
-    <div class="iec-clock-modal--overlay">
-      <div class="iec-clock-modal--window">
-        <div class="iec-clock-modal--result">
-          <p @click="goToHoursSelect">{{ addLeadingZero(hours) }}:</p>
-          <p @click="goToMinutesSelect">{{ addLeadingZero(minutes) }}</p>
-        </div>
-        <clock-face-hours v-if="isHoursSelecting" @selected="selectHours"/>
-        <clock-face-minutes v-else @selected="selectMinutes" @minuteHovered="minuteHovered"/>
-        <div class="iec-clock-modal--buttons">
-          <div class="iec-clock-modal--button" @click="$emit('close')">CANCEL</div>
-          <div class="iec-clock-modal--button" @click="save">SAVE</div>
-        </div>
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+  .iec-clock-modal(v-if="isShown")
+    .iec-clock-modal--overlay
+      .iec-clock-modal--window
+        .iec-clock-modal--result
+          p(@click="goToHoursSelect") {{ addLeadingZero(hours) }} :
+          p(@click="goToMinutesSelect") {{ addLeadingZero(minutes) }}
+        clock-face-hours(v-if="isHoursSelecting" @selected="selectHours")
+        clock-face-minutes(v-else @selected="selectMinutes" @minuteHovered="minuteHovered")
+        .iec-clock-modal--buttons
+          .iec-clock-modal--button(@click="$emit('close')") CANCEL
+          .iec-clock-modal--button(@click="save") SAVE
 </template>
 
 <script lang="ts">

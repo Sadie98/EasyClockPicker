@@ -1,17 +1,16 @@
-<template>
-  <div class="easy-clock-picker">
-    <time-input
+<template lang="pug">
+  .easy-clock-picker
+    time-input(
         :placeholder="placeholder"
         @showClockModal="showClockModal"
         :value="valueLocal"
-    />
-    <clock-modal
+    )
+    clock-modal(
         :isShown="isShownClockModal"
         @close="hideClockModal"
         @save="save"
         :value="valueLocal"
-    />
-  </div>
+    )
 </template>
 
 <script lang="ts">

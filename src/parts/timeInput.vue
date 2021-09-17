@@ -1,17 +1,14 @@
-<template>
-  <label class="iec-label">
-    <p class="iec-input--title">{{ title }}</p>
+<template lang="pug">
+  label.iec-label
+    p.iec-input--title {{ title }}
 
-    <input
-        class="iec-input"
-        :value="value"
-        :placeholder="placeholder"
-        @click="$emit('showClockModal')"
-        @input="$emit('input', $event.target.value)"
-        @keydown.enter="$emit('enter', $event.target.value)"
-    >
-
-  </label>
+    input.iec-input(
+      :value="value"
+      :placeholder="placeholder"
+      @click="$emit('showClockModal')"
+      @input="$emit('input', $event.target.value)"
+      @keydown.enter="$emit('enter', $event.target.value)"
+    )
 </template>
 
 <script lang="ts">
