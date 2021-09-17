@@ -14,14 +14,14 @@
   </label>
 </template>
 
-<script>
-export default {
-  name: "timeInput",
-  props: {
-    placeholder: String,
-    title: String,
-    value: String,
-  }
+<script lang="ts">
+import {Component, Prop, Vue} from 'vue-property-decorator';
+
+@Component
+export default class timeInput extends Vue {
+  @Prop() placeholder: string = '';
+  @Prop() title: string = '';
+  @Prop() value: string = '';
 }
 </script>
 

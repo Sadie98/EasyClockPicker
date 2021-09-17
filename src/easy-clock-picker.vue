@@ -16,8 +16,8 @@
 
 <script lang="ts">
 
-import TimeInput from "@/parts/timeInput";
-import ClockModal from "@/parts/clockModal";
+import TimeInput from "@/parts/timeInput.vue";
+import ClockModal from "@/parts/clockModal.vue";
 import {Component, Vue, Prop, Watch} from "vue-property-decorator";
 
 @Component({components: {ClockModal, TimeInput}})

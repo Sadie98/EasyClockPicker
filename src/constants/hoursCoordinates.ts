@@ -5,12 +5,13 @@ const cx = 50;
 const cy = 50;
 let r = 50;
 
-export let hoursCoordinates = [];
+export let hoursCoordinates: Array<{ top: string, left: string, val: string }> = [];
 let angle = Math.PI;
 for ( let hours = 0; hours < 24; hours++ ) {
     if (hours === 12) r -= 13;
     const x = cx + (r * Math.cos(angle))
     const y = cy + (r * Math.sin(angle))
+
     hoursCoordinates.push({
         top: `calc(${x}% - 12px)`,
         left: `calc(${y}% - 12px)`,

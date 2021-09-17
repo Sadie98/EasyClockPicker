@@ -3,7 +3,8 @@
     <div class="iec-clock-modal--overlay">
       <div class="iec-clock-modal--window">
         <div class="iec-clock-modal--result">
-          <p @click="goToHoursSelect">{{ addLeadingZero(hours) }}:</p><p @click="goToMinutesSelect">{{ addLeadingZero(minutes) }}</p>
+          <p @click="goToHoursSelect">{{ addLeadingZero(hours) }}:</p>
+          <p @click="goToMinutesSelect">{{ addLeadingZero(minutes) }}</p>
         </div>
         <clock-face-hours v-if="isHoursSelecting" @selected="selectHours"/>
         <clock-face-minutes v-else @selected="selectMinutes" @minuteHovered="minuteHovered"/>
@@ -16,54 +17,53 @@
   </div>
 </template>
 
-<script>
-import ClockFaceHours from "@/parts/clockFaceHours";
-import ClockFaceMinutes from "@/parts/clockFaceMinutes";
-export default {
-  name: "clockModal",
-  components: {ClockFaceMinutes, ClockFaceHours},
-  props: {
-    isShown: Boolean,
-    value: String,
-  },
-  data() {
-    return {
-      hours: 0,
-      minutes: 0,
-      isHoursSelecting: true,
-    }
-  },
+<script lang="ts">
+import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
+import ClockFaceHours from "@/parts/clockFaceHours.vue";
+import ClockFaceMinutes from "@/parts/clockFaceMinutes.vue";
 
-  watch: {
-    value: function (){
-      [this.hours, this.minutes] = this.value.split(':');
-    }
-  },
+@Component({ components: { ClockFaceMinutes, ClockFaceHours }})
+export default class clockModal extends Vue {
+  @Prop() isShown: Boolean = false;
+  @Prop() value: String = '';
 
-  methods: {
-    selectHours(val){
-      this.hours = val;
-      this.isHoursSelecting = false;
-    },
-    selectMinutes(val){
-      this.minutes = val;
-    },
-    goToHoursSelect(){
-      this.isHoursSelecting = true;
-    },
-    goToMinutesSelect(){
-      this.isHoursSelecting = false;
-    },
-    addLeadingZero(num){
-      return ('0' + num.toString()).slice(-2);
-    },
-    save(){
-      const timeVal = this.addLeadingZero(this.hours) + ':' + this.addLeadingZero(this.minutes);
-      this.$emit('save', timeVal);
-    },
-    minuteHovered(val){
-      this.minutes = val;
-    }
+  private hours = '0';
+  private minutes = '0';
+  private isHoursSelecting = true;
+
+  @Watch('value')
+  private onValueChange() {
+    [this.hours, this.minutes] = this.value.split(':');
+  }
+
+  private selectHours(val: string) {
+    this.hours = val;
+    this.isHoursSelecting = false;
+  }
+
+  private selectMinutes(val: string) {
+    this.minutes = val;
+  }
+
+  private goToHoursSelect() {
+    this.isHoursSelecting = true;
+  }
+
+  private goToMinutesSelect() {
+    this.isHoursSelecting = false;
+  }
+
+  private addLeadingZero(num: string) {
+    return ('0' + num.toString()).slice(-2);
+  }
+
+  private save() {
+    const timeVal = this.addLeadingZero(this.hours) + ':' + this.addLeadingZero(this.minutes);
+    this.$emit('save', timeVal);
+  }
+
+  private minuteHovered(val: string) {
+    this.minutes = val;
   }
 }
 </script>
@@ -93,7 +93,7 @@ export default {
   z-index: 1051;
 }
 
-.iec-clock-modal--result{
+.iec-clock-modal--result {
   height: 100px;
   line-height: 100px;
   background-color: #604CDF;
@@ -114,12 +114,15 @@ export default {
   font-size: 15px;
   color: #907eff;
 }
-.iec-clock-modal--button{
+
+.iec-clock-modal--button {
   cursor: pointer;
 }
-.iec-clock-modal--button:hover{
+
+.iec-clock-modal--button:hover {
   color: #5c48d6
 }
+
 p {
   display: inline;
   user-select: none;
